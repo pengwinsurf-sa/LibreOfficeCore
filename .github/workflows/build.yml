@@ -185,6 +185,7 @@ jobs:
       - name: Build PDFium
         run: |
           cd pdfium
+          export PATH="$PWD/../depot_tools:$PATH"
           gn gen out/Release --args="is_debug=false"
           ninja -C out/Release pdfium
 
