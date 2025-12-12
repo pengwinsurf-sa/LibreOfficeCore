@@ -177,7 +177,6 @@ jobs:
           # Set LDFLAGS to include coverage for linking gcov runtime
           export CC="gcc-12"
           export CXX="g++-12"
-          export LDFLAGS="-lgcov"
           ./autogen.sh \
               --with-distro=CPLinux-LOKit \
               --with-extra-cc-flags="--coverage" \
@@ -191,8 +190,6 @@ jobs:
       
       - name: Build LibreOffice
         run: |
-            # Set compiler
-            export LDFLAGS="-lgcov"
             export CFLAGS="--coverage"
             export CXXFLAGS="--coverage"
             make -j$(nproc)
