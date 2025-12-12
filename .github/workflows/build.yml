@@ -169,6 +169,7 @@ jobs:
               libsane-dev \
               unixodbc-dev \
               libcurl4-gnutls-dev \
+              libpoppler-dev `
               doxygen
 
           
@@ -185,6 +186,7 @@ jobs:
               --with-system-libpng \
               --with-system-jpeg \
               --with-system-freetype \
+              --with-system-poppler \
               --disable-pdfium  \
               --disable-epm \
               --without-package-format \
