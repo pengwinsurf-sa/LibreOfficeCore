@@ -171,23 +171,12 @@ jobs:
               libcurl4-gnutls-dev \
               doxygen
       
-      - name: Verify GCC version
-        run: |
-          export CC="gcc-12"
-          export CXX="g++-12"
-          echo "Checking GCC version..."
-          gcc --version
-          GCC_VERSION=$(gcc -dumpversion | cut -d. -f1)
-          if [ "$GCC_VERSION" -lt 12 ]; then
-            echo "ERROR: GCC $GCC_VERSION is too old. LibreOffice requires GCC 12+"
-            exit 1
-          fi
-          echo "✓ GCC $GCC_VERSION is sufficient"
-      
       - name: Configure build
         run: |
           # Configure with coverage flags for compilation and linking
           # Set LDFLAGS to include coverage for linking gcov runtime
+          export CC="gcc-12"
+          export CXX="g++-12"
           export LDFLAGS="-lgcov"
           ./autogen.sh \
               --with-distro=CPLinux-LOKit \
