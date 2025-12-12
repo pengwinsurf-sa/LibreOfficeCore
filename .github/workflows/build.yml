@@ -176,12 +176,11 @@ jobs:
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
           echo "$PWD/depot_tools" >> $GITHUB_PATH
 
-      - name: Checkout PDFium
+      - name: Fetch PDFium with dependencies
         run: |
-          git clone https://pdfium.googlesource.com/pdfium
-          cd pdfium
+          mkdir pdfium && cd pdfium
           gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
-          gclient sync
+          gclient sync --with_branch_heads
 
       - name: Build PDFium
         run: |
