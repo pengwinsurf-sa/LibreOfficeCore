@@ -186,8 +186,7 @@ jobs:
               --with-system-libpng \
               --with-system-jpeg \
               --with-system-freetype \
-              --enable-poppler \
-              --with-system-poppler \
+              --disable-pdfimport \
               --disable-epm \
               --without-package-format \
               --with-doxygen=/usr/bin/doxygen 
