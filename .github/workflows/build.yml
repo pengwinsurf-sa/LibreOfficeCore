@@ -187,7 +187,6 @@ jobs:
               --with-system-jpeg \
               --with-system-freetype \
               --with-system-poppler \
-              --disable-pdfium  \
               --disable-epm \
               --without-package-format \
               --with-doxygen=/usr/bin/doxygen 
