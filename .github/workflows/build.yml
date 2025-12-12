@@ -40,6 +40,8 @@ jobs:
           
           # Install essential packages (some may already be installed by build-dep)
           sudo apt-get install -y \
+              gcc-12 \
+              g++-12 \
               lcov \
               git \
               build-essential \
@@ -171,6 +173,8 @@ jobs:
       
       - name: Verify GCC version
         run: |
+          export CC="gcc-12"
+          export CXX="g++-12"
           echo "Checking GCC version..."
           gcc --version
           GCC_VERSION=$(gcc -dumpversion | cut -d. -f1)
