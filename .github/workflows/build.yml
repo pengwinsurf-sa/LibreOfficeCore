@@ -169,7 +169,7 @@ jobs:
               libsane-dev \
               unixodbc-dev \
               libcurl4-gnutls-dev \
-              libpoppler-dev `
+              libpoppler-dev \
               doxygen
 
           
