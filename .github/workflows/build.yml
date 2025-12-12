@@ -170,7 +170,31 @@ jobs:
               unixodbc-dev \
               libcurl4-gnutls-dev \
               doxygen
-      
+              
+      - name: Install depot_tools (provides gclient)
+        run: |
+          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+          echo "$PWD/depot_tools" >> $GITHUB_PATH
+
+      - name: Checkout PDFium
+        run: |
+          git clone https://pdfium.googlesource.com/pdfium
+          cd pdfium
+          gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
+          gclient sync
+
+      - name: Build PDFium
+        run: |
+          cd pdfium
+          gn gen out/Release --args="is_debug=false"
+          ninja -C out/Release pdfium
+
+      - name: Install PDFium
+        run: |
+          sudo cp pdfium/out/Release/libpdfium.so /usr/local/lib/
+          sudo cp -r pdfium/public /usr/local/include/pdfium
+          sudo ldconfig
+          
       - name: Configure build
         run: |
           # Configure with coverage flags for compilation and linking
@@ -184,12 +208,14 @@ jobs:
               --with-system-libpng \
               --with-system-jpeg \
               --with-system-freetype \
+              --with-system-pdfium  \
               --disable-epm \
               --without-package-format \
               --with-doxygen=/usr/bin/doxygen 
       
       - name: Build LibreOffice
         run: |
+            # Set compiler
             export CFLAGS="--coverage"
             export CXXFLAGS="--coverage"
             make -j$(nproc)
