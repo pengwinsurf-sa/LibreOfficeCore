@@ -186,7 +186,7 @@ jobs:
               --with-system-libpng \
               --with-system-jpeg \
               --with-system-freetype \
-              --with-system-poppler \
+              --enable-poppler \
               --disable-pdfium  \
               --disable-epm \
               --without-package-format \
