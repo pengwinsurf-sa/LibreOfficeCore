@@ -170,24 +170,6 @@ jobs:
               unixodbc-dev \
               libcurl4-gnutls-dev \
               doxygen
-              
-      - name: Install depot_tools
-        run: |
-          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-          echo "$PWD/depot_tools" >> $GITHUB_PATH
-
-      - name: Fetch PDFium with dependencies
-        run: |
-          mkdir pdfium
-          cd pdfium
-          gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
-          gclient sync --with_branch_heads
-          cd pdfium
-          gn gen out/Release --args="is_debug=false"
-          ninja -C out/Release pdfium 
-          sudo cp pdfium/out/Release/libpdfium.so /usr/local/lib/
-          sudo cp -r pdfium/public /usr/local/include/pdfium
-          sudo ldconfig
 
           
       - name: Configure build
@@ -203,7 +185,7 @@ jobs:
               --with-system-libpng \
               --with-system-jpeg \
               --with-system-freetype \
-              --with-system-pdfium  \
+              --disable-pdfium  \
               --disable-epm \
               --without-package-format \
               --with-doxygen=/usr/bin/doxygen 
