@@ -182,6 +182,7 @@ jobs:
           cd pdfium
           gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
           gclient sync --with_branch_heads
+          cd pdfium
           gn gen out/Release --args="is_debug=false"
           ninja -C out/Release pdfium 
           sudo cp pdfium/out/Release/libpdfium.so /usr/local/lib/
